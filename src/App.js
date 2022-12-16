@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import { Header } from "./components/header";
+import { Main } from "./components/main";
+import { useEffect, useState } from 'react';
+import { API } from "./constants";
+import { ThemeProvider } from 'styled-components';
+import { mainTheme } from "./styles/globalStyles";
+export default function App() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+      getData();
+  }, []);
+  const getData = async()=>{
+      try {
+          const response = await fetch(API);
+          const resultResponse = await response.json();
+          setData(resultResponse?.data);
+          return     resultResponse;
+        } catch (e) {
+          throw new Error('Cannot connect to server');
+        }
+   }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={mainTheme}>
+      <Header data={data} />
+      <Main data={data} />
+    </ThemeProvider>
   );
 }
 
-export default App;
+
