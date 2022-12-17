@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FlexCenter } from '../../styles/globalStyles';
+import { MEDIA_SIZE_ADAPT } from '../../constants';
 
 export const Wrap = styled.div`
     display: flex;
@@ -26,5 +27,9 @@ export const Label = styled(FlexCenter)`
     width: 100%;
     :not(:first-child) {
         border-left: 1px solid;
+    }
+    @media screen and (max-width: ${MEDIA_SIZE_ADAPT}px) {
+        padding: 0 10px;
+        font-size: 12px;
     }
 `;

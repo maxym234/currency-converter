@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 import { FlexCenter } from '../../styles/globalStyles';
+import { MEDIA_SIZE_ADAPT } from '../../constants';
 
 export const Wrap = styled(FlexCenter)`
     margin-top: 12px;
     min-height: 600px;
+    @media screen and (max-width: ${MEDIA_SIZE_ADAPT}px) {
+        padding: 0 20px;
+        min-height: 450px;
+    }
 `;
 
 export const Container = styled(FlexCenter)`
@@ -25,6 +30,9 @@ export const Title = styled.h1`
     font-size: 31px;
     color: ${({ theme }) => theme.colors.main};
     font-family: sans-serif;
+    @media screen and (max-width: ${MEDIA_SIZE_ADAPT}px) {
+        font-size: 24px;
+    }
 `;
 
 export const LogoSite = styled.img`
@@ -42,5 +50,8 @@ export const SubContainer = styled(FlexCenter)`
 export const ErrorText = styled.span`
     color: red;
     margin-bottom: 10px;
+    @media screen and (max-width: ${MEDIA_SIZE_ADAPT}px) {
+        font-size: 9px;
+    }
 `;
 

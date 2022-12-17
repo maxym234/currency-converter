@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Select from 'antd/lib/select';
+import { MEDIA_SIZE_ADAPT } from '../../constants';
 
 export const SelectStyled = styled(Select)`
     display: flex;
@@ -13,5 +14,8 @@ export const SelectStyled = styled(Select)`
             border-color: #7e6d6d !important;
             box-shadow: 0px 2px 11px #0000003d !important;
         }
+    }    
+    @media screen and (max-width: ${MEDIA_SIZE_ADAPT}px) {
+        margin: 0 10px;
     }
 `;
