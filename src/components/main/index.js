@@ -21,11 +21,11 @@ export const Main = ({ data = [] }) => {
 
   const funcFrom = (v, d) => {
     const key = d !== 'uah' ? secondSelect?.toUpperCase() : firstSelect?.toUpperCase();
-    return d !== 'uah' ? firstSelect === 'eur' ? 0.9385  * v : firstSelect === 'usd' ? 1.0655 * v : buy?.[key] * v : v / buy?.[key] ;
+    return d !== 'uah' ? firstSelect === 'eur' ? 0.9385  * v : firstSelect === 'usd' ? 1.0655 * v : buy?.[key] * v : currency !== 'uah' ? currency === d ? v : v / buy?.[key] : v / buy?.[key] ;
   }
   const funcTo = (v, d) => {
     const key = d !== 'uah' ? firstSelect?.toUpperCase() :  secondSelect?.toUpperCase(); 
-    return d !== 'uah' ? secondSelect === 'eur' ? 0.9385  * v : secondSelect === 'usd' ? 1.0655 * v : buy?.[key] * v : v / buy?.[key] ;
+    return d !== 'uah' ? secondSelect === 'eur' ? 0.9385  * v : secondSelect === 'usd' ? 1.0655 * v : buy?.[key] * v : currency !== 'uah' ? currency === d ? v : v / buy?.[key] : v / buy?.[key] ;
   }
   
   const handleChangeValue = (e, num) => {
@@ -35,6 +35,7 @@ export const Main = ({ data = [] }) => {
   const handleChangeSelect = (e, num) => {
     num ? setSecondSelect(e) : setFirstSelect(e); 
     setСurrency(e);
+    setValue(0);
   }
   
   const tryConvert = (currency, value, convert) => {
@@ -45,10 +46,8 @@ export const Main = ({ data = [] }) => {
     const rounded = Math.round(output * 1000) / 1000;
     return rounded.toString();
   }
-  
   const firstFieldValue = currency === secondSelect ? tryConvert(secondSelect, value, funcFrom) : value;
   const secondFieldValue = currency === firstSelect ? tryConvert(firstSelect, value, funcTo) : value;
-  console.log(firstFieldValue, 'firstFieldValue', secondFieldValue);
   return (
     <Wrap>
       <Container>
